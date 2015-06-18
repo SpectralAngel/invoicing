@@ -40,6 +40,12 @@ INSTALLED_APPS = (
     # Third Party
     'django_extensions',
     'bootstrap3',
+    # Own
+    'company',
+    'invoice',
+    'people',
+    'products',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
