@@ -5,7 +5,7 @@ from company.models import Place
 
 class Account(AbstractUser):
 
-    place = models.ForeignKey(Place)
+    place = models.ForeignKey(Place, blank=True, null=True)
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.last_name])
