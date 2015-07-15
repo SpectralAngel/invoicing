@@ -16,6 +16,7 @@ class Invoice(TimeStampedModel):
     number = models.IntegerField(default=0)
     place = models.ForeignKey(Place)
     account = models.ForeignKey(Account)
+    discount = models.DecimalField(decimal_places=2, max_digits=3, default=0)
     closed = models.BooleanField(default=False)
 
     def __str__(self):
