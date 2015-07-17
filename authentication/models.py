@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from company.models import Place
 
 
 class Account(AbstractUser):
 
-    place = models.ForeignKey(Place, blank=True, null=True)
+    default_place = models.ForeignKey('company.Place', blank=True, null=True)
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.last_name])
