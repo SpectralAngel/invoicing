@@ -10,8 +10,8 @@ from people.models import Address, PhoneNumber
 class Company(TimeStampedModel):
     name = models.CharField(max_length=255)
     rtn = models.CharField(max_length=255)
-    next_invoice_correlative = models.IntegerField(default=0)
-    addresses = models.ManyToManyField(Address)
+    cai = models.CharField(max_length=255, blank=True, null=True)
+    addresses = GenericRelation(Address)
     phone_numbers = GenericRelation(PhoneNumber)
 
     def __str__(self):

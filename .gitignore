@@ -155,4 +155,4 @@ crashlytics-build.properties
 
 ## npm and bower
 node_modules/
-bower_components/
+static/bower_components/
