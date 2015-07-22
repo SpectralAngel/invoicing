@@ -6,7 +6,9 @@
             'invoicing.config',
             'invoicing.routes',
             'invoicing.layout',
-            'invoicing.authentication'
+            'invoicing.authentication',
+            'invoicing.costumers',
+            'invoicing.utils'
         ]);
 
     angular
