@@ -15,14 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-cookies": "~1.4.3",
-    "angular-route": "~1.4.3",
     "bootstrap-material-design": "~0.3.0",
     "bootstrap": "~3.3.0",
-    "ngDialog": "~0.4.0",
     "underscore": "~1.8.3"
-  },
-  "resolutions": {
-    "angular": "1.4.3"
   }
 }
