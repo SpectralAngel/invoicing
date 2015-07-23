@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap3',
     'rest_framework',
-    'compressor',
+    'rest_framework_swagger',
+    'webpack_loader',
     # Own
     'authentication',
     'company',
@@ -116,7 +117,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'assets'),
 )
 
 STATICFILES_FINDERS = (
@@ -124,6 +125,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+WEBPACK_LOADER = {
+    'BUNDLE_DIR_NAME': 'bundles/',
+    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
