@@ -36,25 +36,16 @@ var Companies = React.createClass({
             }
 
             var companies = result.map(function (c) {
-                var places = [];
-                for (var i=0; i < c.place_set.length; i++) {
-                    $.getJSON(c.place_set[i], function (data) {
-                        places.push(data);
-                    });
-                }
-                var company = {
+                return {
                     id: c.id,
                     name: c.name,
                     rtn: c.rtn,
                     cai: c.cai,
-                    places: places
+                    places: c.place_set
                 };
-                console.log(company);
-                return company;
             });
 
             // Update the component's state. This will trigger a render.
-            console.log(companies);
             self.setState({companies: companies});
 
         });

@@ -68,10 +68,9 @@ class AccountCostumersViewSet(viewsets.ModelViewSet):
     serializer_class = CostumerSerializer
 
     def list(self, request, account_username=None, **kwargs):
-        queryset = self.queryset.filter(account__username=account_username)
-        serializer = self.serializer_class(queryset, many=True)
+        self.queryset = self.queryset.filter(account__username=account_username)
 
-        return Response(serializer.data)
+        return super(AccountCostumersViewSet, self).list(request, [], **kwargs)
 
 
 class AccountCompanyViewSet(viewsets.ModelViewSet):
@@ -79,10 +78,9 @@ class AccountCompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
 
     def list(self, request, account_username=None, **kwargs):
-        queryset = self.queryset.filter(account__username=account_username)
-        serializer = self.serializer_class(queryset, many=True)
+        self.queryset = self.queryset.filter(account__username=account_username)
 
-        return Response(serializer.data)
+        return super(AccountCompanyViewSet, self).list(request, [], **kwargs)
 
 
 class AccountPlacesViewSet(viewsets.ModelViewSet):
