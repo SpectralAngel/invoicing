@@ -1,5 +1,6 @@
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+
 from company.models import Costumer, Company, Place
 from company.serializers import CostumerSerializer, CompanySerializer, \
     PlaceSerializer
@@ -30,7 +31,6 @@ class CostumerViewSet(viewsets.ModelViewSet):
         return permissions.IsAuthenticated(), IsOwnerOf()
 
     def perform_create(self, serializer):
-
         serializer.save(account=self.request.user)
 
         return super(CostumerViewSet, self).perform_create(serializer)
@@ -47,7 +47,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return permissions.IsAuthenticated(), IsOwnerOf()
 
     def perform_create(self, serializer):
-
         serializer.save(account=self.request.user)
 
         return super(CompanyViewSet, self).perform_create(serializer)
@@ -70,6 +69,30 @@ class AccountCostumersViewSet(viewsets.ModelViewSet):
 
     def list(self, request, account_username=None, **kwargs):
         queryset = self.queryset.filter(account__username=account_username)
+        serializer = self.serializer_class(queryset, many=True)
+
+        return Response(serializer.data)
+
+
+class AccountCompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.select_related('account').all()
+    serializer_class = CompanySerializer
+
+    def list(self, request, account_username=None, **kwargs):
+        queryset = self.queryset.filter(account__username=account_username)
+        serializer = self.serializer_class(queryset, many=True)
+
+        return Response(serializer.data)
+
+
+class AccountPlacesViewSet(viewsets.ModelViewSet):
+    queryset = Place.objects.select_related('company__account').all()
+    serializer_class = CompanySerializer
+
+    def list(self, request, account_username=None, **kwargs):
+        queryset = self.queryset.filter(
+            company__account__username=account_username
+        )
         serializer = self.serializer_class(queryset, many=True)
 
         return Response(serializer.data)

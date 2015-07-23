@@ -19,7 +19,7 @@ from django.contrib import admin
 from rest_framework_nested import routers
 from authentication.views import AccountViewSet, LoginView, LogoutView
 from company.views import CostumerViewSet, AccountCostumersViewSet, \
-    CompanyViewSet, PlaceViewSet
+    CompanyViewSet, PlaceViewSet, AccountCompanyViewSet, AccountPlacesViewSet
 from invoicing.views import IndexView
 
 router = routers.SimpleRouter()
@@ -33,6 +33,8 @@ costumer_router = routers.NestedSimpleRouter(
 )
 
 costumer_router.register(r'costumers', AccountCostumersViewSet)
+costumer_router.register(r'companies', AccountCompanyViewSet)
+costumer_router.register(r'places', AccountPlacesViewSet)
 
 urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
