@@ -67,8 +67,11 @@ class AccountCostumersViewSet(viewsets.ModelViewSet):
     queryset = Costumer.objects.select_related('account').all()
     serializer_class = CostumerSerializer
 
+    def filter_queryset(self, queryset):
+        return self.queryset.filter(account__username=self.account_name)
+
     def list(self, request, account_username=None, **kwargs):
-        self.queryset = self.queryset.filter(account__username=account_username)
+        self.account_name = account_username
 
         return super(AccountCostumersViewSet, self).list(request, [], **kwargs)
 
@@ -77,8 +80,11 @@ class AccountCompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.select_related('account').all()
     serializer_class = CompanySerializer
 
+    def filter_queryset(self, queryset):
+        return self.queryset.filter(account__username=self.account_name)
+
     def list(self, request, account_username=None, **kwargs):
-        self.queryset = self.queryset.filter(account__username=account_username)
+        self.account_name = account_username
 
         return super(AccountCompanyViewSet, self).list(request, [], **kwargs)
 
