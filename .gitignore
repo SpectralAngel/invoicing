@@ -157,3 +157,5 @@ crashlytics-build.properties
 node_modules/
 assets/bower_components/
 assets/bundles/
+
+webpack-stats.json
