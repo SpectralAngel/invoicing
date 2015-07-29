@@ -22,13 +22,18 @@ from authentication.views import AccountViewSet, LoginView, LogoutView, \
     CurrentUserView
 from company.views import CostumerViewSet, AccountCostumersViewSet, \
     CompanyViewSet, PlaceViewSet, AccountCompanyViewSet, AccountPlacesViewSet
+from invoice.views import InvoiceViewSet, SaleViewSet
 from invoicing.views import IndexView
+from products.views import ProductTemplateViewSet
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
 router.register(r'costumers', CostumerViewSet)
 router.register(r'companies', CompanyViewSet)
 router.register(r'places', PlaceViewSet)
+router.register(r'invoices', InvoiceViewSet)
+router.register(r'sales', SaleViewSet)
+router.register(r'products', ProductTemplateViewSet)
 
 costumer_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'

@@ -1,5 +1,4 @@
 from rest_framework import viewsets, permissions
-from rest_framework.response import Response
 
 from company.models import Costumer, Company, Place
 from company.serializers import CostumerSerializer, CompanySerializer, \
@@ -91,12 +90,14 @@ class AccountCompanyViewSet(viewsets.ModelViewSet):
 
 class AccountPlacesViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.select_related('company__account').all()
-    serializer_class = CompanySerializer
+    serializer_class = PlaceSerializer
+
+    def filter_queryset(self, queryset):
+        return self.queryset.filter(
+            company__account__username=self.account_name
+        )
 
     def list(self, request, account_username=None, **kwargs):
-        queryset = self.queryset.filter(
-            company__account__username=account_username
-        )
-        serializer = self.serializer_class(queryset, many=True)
+        self.account_name = account_username
 
-        return Response(serializer.data)
+        return super(AccountPlacesViewSet, self).list(request, [], **kwargs)

@@ -1,21 +1,21 @@
 from rest_framework import serializers
-from authentication.serializers import AccountSerializer
-from company.serializers import PlaceSerializer
-from invoice.models import Invoice
+
+from invoice.models import Invoice, Sale
 
 
-class InvoiceSerializer(serializers.ModelSerializer):
-    account = AccountSerializer(read_only=True, required=False)
-    place = PlaceSerializer(read_only=True, required=False)
-
+class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Invoice
 
-    fields = ('id', 'account', 'name', 'rtn', 'cai', 'created')
-    read_only_fields = ('id', 'created', )
+    fields = (
+        'id', 'costumer', 'account', 'place', 'number', 'created', 'discount'
+    )
+    read_only_fields = ('id', 'created',)
 
-    def get_validation_exclusion(self):
 
-        exclusions = super(InvoiceSerializer, self).get_validation_exclusions()
+class SaleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Sale
 
-        return exclusions + ['account', 'place']
+    fields = ('id', 'invoice', 'product', 'quantity', 'price', 'tax', 'total',)
+    read_only_fields = ('id', 'created',)

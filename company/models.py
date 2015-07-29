@@ -26,7 +26,7 @@ class Place(TimeStampedModel):
     company = models.ForeignKey(Company)
     name = models.CharField(max_length=255)
     prefix = models.CharField(max_length=255)
-    next_receipt_number = models.IntegerField(default=0)
+    next_receipt_number = models.IntegerField(default=1)
     max_emission_date = models.DateField(default=timezone.now)
 
     def __str__(self):

@@ -48,7 +48,8 @@ class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
 
-        fields = ('id', 'name', 'company', 'prefix', 'next_receipt_number',)
+        fields = ('id', 'name', 'company', 'prefix', 'next_receipt_number',
+                  'max_emission_date',)
         read_only_fields = ('id', 'created',)
 
     def get_validation_exclusion(self):

@@ -50,7 +50,8 @@ var PlaceTable = React.createClass({
                     return <PlaceRow name={place.name} key={place.id}
                                      id={place.id}
                                      prefix={place.prefix}
-                                     max_emision_date={place.max_emision_date}/>
+                                     next_receipt_number={place.next_receipt_number}
+                                     max_emission_date={place.max_emission_date}/>
                 })}
                 </tbody>
             </table>
