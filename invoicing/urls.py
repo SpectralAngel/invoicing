@@ -18,11 +18,10 @@ from django.contrib import admin
 
 from rest_framework_nested import routers
 
-from authentication.views import AccountViewSet, LoginView, LogoutView, \
-    CurrentUserView
+from authentication.views import AccountViewSet
 from company.views import CostumerViewSet, AccountCostumersViewSet, \
     CompanyViewSet, PlaceViewSet, AccountCompanyViewSet, AccountPlacesViewSet
-from invoice.views import InvoiceViewSet, SaleViewSet
+from invoice.views import InvoiceViewSet, SaleViewSet, InvoiceDetailView
 from invoicing.views import IndexView
 from products.views import ProductTemplateViewSet
 
@@ -46,10 +45,10 @@ costumer_router.register(r'places', AccountPlacesViewSet)
 urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/v1/', include(costumer_router.urls)),
-    url(r'^api/v1/auth/current/user/$', CurrentUserView.as_view(),
-        name='current-user'),
-    url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
-    url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+
+    url(r'^invoice/(?P<pk>\d+)$', InvoiceDetailView.as_view(), name='invoice'),
+
+    url(r'^auth/', include('djoser.urls.authtoken')),
 
     url(r'^api/v1/api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),

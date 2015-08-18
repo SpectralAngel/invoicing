@@ -9,21 +9,20 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import environ
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root = environ.Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print root
+env = environ.Env(DEBUG=(bool, False), )
+environ.Env.read_env()
 
+SITE_ROOT = root()
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+DEBUG = env('DEBUG')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_nynvl0$i=cbaq_^)pybhx=_h9hff*hm6ym_02689-9y7!==jj'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,8 +40,10 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap3',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
     'webpack_loader',
+    'djoser',
     # Own
     'authentication',
     'company',
@@ -68,7 +69,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            root.path('templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,13 +88,7 @@ WSGI_APPLICATION = 'invoicing.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-    )
-}
+DATABASES = {'default': env.db()}
 
 
 # Internationalization
@@ -117,7 +112,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
+    str(root.path('assets')),
 )
 
 STATICFILES_FINDERS = (
@@ -128,7 +123,7 @@ STATICFILES_FINDERS = (
 
 WEBPACK_LOADER = {
     'BUNDLE_DIR_NAME': 'bundles/',
-    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    'STATS_FILE': str(root.path('webpack-stats.json')),
 }
 
 REST_FRAMEWORK = {
@@ -145,5 +140,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 if not DEBUG:
     WEBPACK_LOADER.update({
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
+        'STATS_FILE': root.path('webpack-stats-prod.json')
     })

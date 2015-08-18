@@ -19,6 +19,8 @@
     "bootstrap": "~3.3.0",
     "underscore": "~1.8.3",
     "jquery.cookie": "~1.4.0",
-    "reflux": "~0.2.11"
+    "reflux": "~0.2.11",
+    "superagent": "~1.2.0",
+    "js-cookie": "~2.0.3"
   }
 }

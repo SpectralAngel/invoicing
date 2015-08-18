@@ -28,6 +28,7 @@ class Place(TimeStampedModel):
     prefix = models.CharField(max_length=255)
     next_receipt_number = models.IntegerField(default=1)
     max_emission_date = models.DateField(default=timezone.now)
+    aproved_range = models.CharField(max_length=255)
 
     def __str__(self):
         return u'{0} en {1}'.format(self.company, self.name)

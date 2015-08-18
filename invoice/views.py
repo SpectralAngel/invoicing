@@ -1,4 +1,5 @@
 # Create your views here.
+from django.views.generic import DetailView
 from rest_framework import viewsets, permissions
 
 from invoice.models import Sale, Invoice
@@ -37,3 +38,6 @@ class InvoiceViewSet(viewsets.ModelViewSet):
         serializer.save(account=self.request.user)
 
         return super(InvoiceViewSet, self).perform_create(serializer)
+
+class InvoiceDetailView(DetailView):
+    model = Invoice
