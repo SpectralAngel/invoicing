@@ -1,10 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from authentication.forms import AccountForm
+from authentication.forms import AccountChangeForm
 from authentication.models import Account
 
 
 class AccountAdmin(UserAdmin):
-    form = AccountForm
+    form = AccountChangeForm
 
-admin.site.register(Account, UserAdmin)
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {
+            'fields': ('default_place',)
+        }),
+    )
+
+admin.site.register(Account, AccountAdmin)

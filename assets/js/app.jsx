@@ -14,7 +14,7 @@ var App = React.createClass({
 
     componentDidMount: function() {
         var self = this;
-        $.getJSON('/api/v1/auth/current/user/', function(user){
+        $.getJSON('/auth/me/', function(user){
             var costumers_url = "/api/v1/accounts/" + user.username + "/costumers/";
             var companies_url = "/api/v1/accounts/" + user.username + "/companies/";
             self.setState({

@@ -12,7 +12,7 @@ var InvoiceForm = React.createClass({
     },
     componentDidMount: function() {
         var self = this;
-        $.getJSON('/api/v1/auth/current/user/', function(user){
+        $.getJSON('/auth/me/', function(user){
             self.setState({
                 costumers_url : "/api/v1/accounts/" + user.username + "/costumers/",
                 places_url : "/api/v1/accounts/" + user.username + "/places/",
