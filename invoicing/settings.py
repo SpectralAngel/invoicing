@@ -140,5 +140,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 if not DEBUG:
     WEBPACK_LOADER.update({
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': root.path('webpack-stats-prod.json')
+        'STATS_FILE': str(root.path('webpack-stats-prod.json'))
     })
