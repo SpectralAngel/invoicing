@@ -45,7 +45,7 @@ class Invoice(TimeStampedModel):
 
     def total(self):
 
-        return self.tax() + self.subtotal()
+        return self.tax() + self.subtotal() - self.discount
 
     def __str__(self):
         return u'{0} {1}'.format(self.number, self.costumer.name)
