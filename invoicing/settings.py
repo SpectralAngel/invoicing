@@ -13,7 +13,6 @@ import os
 import environ
 
 root = environ.Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print root
 env = environ.Env(DEBUG=(bool, False), )
 environ.Env.read_env()
 
