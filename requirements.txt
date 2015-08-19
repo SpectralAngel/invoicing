@@ -13,3 +13,5 @@ markdown
 django-filter
 djoser
 django-environ
+gunicorn
+dj-static
