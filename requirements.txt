@@ -16,3 +16,4 @@ django-environ
 gunicorn
 dj-static
 psycopg2
+bootstrap3
