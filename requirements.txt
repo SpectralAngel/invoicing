@@ -11,7 +11,7 @@ wsgiref
 django-rest-swagger
 markdown
 django-filter
-djoser
+-e git://github.com/sunscrapers/djoser.git#egg=djoser
 django-environ
 gunicorn
 dj-static
