@@ -159,3 +159,4 @@ assets/bower_components/
 assets/bundles/
 
 webpack-stats.json
+webpack-stats-prod.json
