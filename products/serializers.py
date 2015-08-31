@@ -6,5 +6,5 @@ class ProductTemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductTemplate
 
-    fields = ('id', 'name', 'part', 'price', 'cost', 'active',)
+    fields = ('id', 'name', 'part', 'price', 'cost', 'active', 'company')
     read_only_fields = ('id', 'created',)
