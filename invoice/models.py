@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import F, Sum
+from django.db.models.functions import Coalesce
 
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -34,14 +35,9 @@ class Invoice(TimeStampedModel):
 
     def tax(self):
 
-        tax = Sale.objects.filter(invoice=self).aggregate(
-            total=Sum('tax')
+        return Sale.objects.filter(invoice=self).aggregate(
+            total=Coalesce(Sum('tax'), Decimal())
         )['total']
-
-        if tax is None:
-            tax = Decimal()
-
-        return tax
 
     def total(self):
 
