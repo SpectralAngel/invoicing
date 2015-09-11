@@ -1,5 +1,5 @@
 var React = require('react');
-var PlaceSelect = require('./placeselect');
+var PlaceSelect = require('./components/place/placeselect');
 var CostumerSelect = require('./costumerselect');
 
 var InvoiceForm = React.createClass({
