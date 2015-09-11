@@ -7,9 +7,10 @@ var Companies = require('./company');
 var Invoices = require('./invoices');
 var Account = require('./account');
 var AccountStore = require('./stores/accounts');
+var AccountActions = require('./actions/account');
 
 var App = React.createClass({
-    mixins: [Reflux.connect(AccountStore, 'me')],
+
     getInitialState: function() {
         return {
 
@@ -19,6 +20,7 @@ var App = React.createClass({
 
     componentDidMount: function() {
         var self = this;
+        AccountActions.me();
         $.getJSON('/auth/me/', function(user){
             var companies_url = "/api/v1/accounts/" + user.username + "/companies/";
             self.setState({
@@ -75,7 +77,7 @@ var App = React.createClass({
         return <div>
             <div className="row">
                 <div className="col-md-6 col-xs-6">
-                    <Account user={this.state.me} />
+                    <Account />
                 </div>
             </div>
             <div className="row">
