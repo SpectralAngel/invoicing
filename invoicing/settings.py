@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import os
+
 import environ
 
 root = environ.Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -120,8 +121,11 @@ STATICFILES_FINDERS = (
 )
 
 WEBPACK_LOADER = {
-    'BUNDLE_DIR_NAME': 'bundles/',
-    'STATS_FILE': str(root.path('webpack-stats.json')),
+    'DEFAULT':
+        {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': str(root.path('webpack-stats.json')),
+        }
 }
 
 REST_FRAMEWORK = {
@@ -137,8 +141,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 if not DEBUG:
     WEBPACK_LOADER.update({
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': str(root.path('webpack-stats-prod.json'))
+        'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': str(root.path('webpack-stats-prod.json'))
+        }
     })
 
 LOGGING = {
