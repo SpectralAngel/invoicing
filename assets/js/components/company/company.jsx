@@ -1,7 +1,18 @@
+'use strict';
 var React = require('react');
+var Reflux = require('reflux');
 var PlaceTable = require('../place/placeTable');
+var PlaceStore = require('../../stores/places');
+var PlaceActions = require('../../actions/place');
 
 var Company = React.createClass({
+    mixins: [Reflux.connect(PlaceStore, 'places')],
+    componentDidMount() {
+        PlaceActions.listCompany(this.props.company);
+    },
+    componentWillReceiveProps(props) {
+        PlaceActions.listCompany(props.company);
+    },
     render: function () {
         return <div className="panel panel-primary companies">
             <div className="panel-heading">
@@ -14,7 +25,7 @@ var Company = React.createClass({
                     <dt>CAI</dt>
                     <dd>{this.props.company.cai}</dd>
                 </dl>
-                <PlaceTable places={this.props.company.places} />
+                <PlaceTable places={this.state.places} />
             </div>
         </div>;
     }

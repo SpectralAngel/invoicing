@@ -1,8 +1,7 @@
+'use strict';
 var React = require('react');
 
 var PlaceRow = React.createClass({
-
-
     render: function () {
         return <tr>
             <td>{this.props.name}</td>
@@ -14,25 +13,6 @@ var PlaceRow = React.createClass({
 });
 
 var PlaceTable = React.createClass({
-    getInitialState: function () {
-        return {places: []};
-    },
-
-    componentDidMount: function () {
-        // When the component loads, send a jQuery AJAX request
-        var self = this;
-        var places = [];
-        this.props.places.map(function (url) {
-            $.getJSON(url, function (result) {
-
-                if (!result) {
-                    return;
-                }
-                places.push(result);
-                self.setState({places: places});
-            });
-        });
-    },
     render: function () {
         return <div className="places">
             <h2>Places</h2>
@@ -46,7 +26,7 @@ var PlaceTable = React.createClass({
                 </tr>
                 </thead>
                 <tbody>
-                {this.state.places.map(function (place) {
+                {this.props.places.map(function (place) {
                     return <PlaceRow name={place.name} key={place.id}
                                      id={place.id}
                                      prefix={place.prefix}
@@ -59,5 +39,4 @@ var PlaceTable = React.createClass({
     }
 });
 
-module.exports = PlaceRow;
 module.exports = PlaceTable;

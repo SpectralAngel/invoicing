@@ -1,50 +1,23 @@
+'use strict';
 var React = require('react');
+var Reflux = require('reflux');
 var Company = require('./company');
+var CompanyStore = require('../../stores/companies');
+var CompanyActions = require('../../actions/company');
 
 var Companies = React.createClass({
-    getInitialState: function () {
-        return {companies: []};
+    mixins: [Reflux.connect(CompanyStore, 'companies')],
+    componentWillReceiveProps(nextProps) {
+        CompanyActions.listAccount(nextProps.user);
     },
-
-    componentDidMount: function () {
-        // When the component loads, send a jQuery AJAX request
-        var self = this;
-
-        $.getJSON(this.props.source, function (result) {
-
-            if (!result || !result || !result.length) {
-                return;
-            }
-
-            var companies = result.map(function (c) {
-                return {
-                    id: c.id,
-                    name: c.name,
-                    rtn: c.rtn,
-                    cai: c.cai,
-                    places: c.place_set
-                };
-            });
-
-            // Update the component's state. This will trigger a render.
-            self.setState({companies: companies});
-
-        });
-
-    },
-
     render: function () {
-
-        var costumers = this.state.companies.map(function (company) {
-            return <Company key={company.id} company={company} name={company.name}
-                            rtn={company.rtn} cai={company.cai}
-                            places={company.places}/>;
-        });
         return <div className="companies">
             <section className="page-header">
                 <h1>Companies</h1>
             </section>
-            {costumers}
+            {this.state.companies.map(function (company) {
+                return <Company key={company.id} company={company}/>;
+            })}
         </div>;
     }
 });
