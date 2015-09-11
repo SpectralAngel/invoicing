@@ -1,10 +1,15 @@
+'use strict';
 var React = require('react');
+var Reflux = require('reflux');
 var Costumers = require('./costumers');
 var Costumer = require('./costumer');
 var Companies = require('./company');
 var Invoices = require('./invoices');
+var Account = require('./account');
+var AccountStore = require('./stores/accounts');
 
 var App = React.createClass({
+    mixins: [Reflux.connect(AccountStore, 'me')],
     getInitialState: function() {
         return {
             costumersDiv: {},
@@ -71,6 +76,11 @@ var App = React.createClass({
     },
     render: function(){
         return <div>
+            <div className="row">
+                <div className="col-md-6 col-xs-6">
+                    <Account user={this.state.me} />
+                </div>
+            </div>
             <div className="row">
                 <div className="col-md-6 col-xs-6">
                     {this.state.costumersDiv}
