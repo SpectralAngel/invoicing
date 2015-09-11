@@ -12,7 +12,7 @@ var App = React.createClass({
     mixins: [Reflux.connect(AccountStore, 'me')],
     getInitialState: function() {
         return {
-            costumersDiv: {},
+
             companiesDiv: {}
         };
     },
@@ -20,15 +20,12 @@ var App = React.createClass({
     componentDidMount: function() {
         var self = this;
         $.getJSON('/auth/me/', function(user){
-            var costumers_url = "/api/v1/accounts/" + user.username + "/costumers/";
             var companies_url = "/api/v1/accounts/" + user.username + "/companies/";
             self.setState({
                 companies_url: companies_url,
-                costumers_url: costumers_url,
                 places: self.state.places,
                 costumers: self.state.costumers,
                 companies: self.state.companies,
-                costumersDiv: <Costumers source={costumers_url} />,
                 companiesDiv: <Companies source={companies_url} />
             });
             $.getJSON("/api/v1/accounts/" + user.username + "/places/", function (result) {
@@ -83,7 +80,7 @@ var App = React.createClass({
             </div>
             <div className="row">
                 <div className="col-md-6 col-xs-6">
-                    {this.state.costumersDiv}
+                    <Costumers />
                 </div>
                 <div className="col-md-6 col-xs-6">
                     {this.state.companiesDiv}
