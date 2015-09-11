@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from authentication.models import Account
 
 from authentication.serializers import AccountSerializer
 from company.models import Costumer, Company, Place
@@ -20,8 +21,11 @@ class CostumerSerializer(serializers.ModelSerializer):
         return exclusions + ['account']
 
 
-class CompanySerializer(serializers.ModelSerializer):
-    account = AccountSerializer(read_only=True, required=False)
+class CompanySerializer(serializers.HyperlinkedModelSerializer):
+    account = serializers.SlugRelatedField(
+        slug_field=Account.USERNAME_FIELD,
+        queryset=Account.objects.all()
+    )
     place_set = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
@@ -42,8 +46,7 @@ class CompanySerializer(serializers.ModelSerializer):
         return exclusions + ['account']
 
 
-class PlaceSerializer(serializers.ModelSerializer):
-    company = CompanySerializer(read_only=True, required=False)
+class PlaceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Place

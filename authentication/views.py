@@ -27,7 +27,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             return permissions.AllowAny(),
 
         if self.request.method == 'POST':
-            return permissions.AllowAny(),
+            return permissions.IsAdminUser(),
 
         return permissions.IsAuthenticated(), IsAccountOwner()
 

@@ -4,11 +4,11 @@ from rest_framework import serializers
 from authentication.models import Account
 
 
-class AccountSerializer(serializers.ModelSerializer):
+class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Account
-        fields = ('id', 'email', 'username', 'first_name', 'last_name',)
+        fields = ('pk', 'email', 'username', 'first_name', 'last_name',)
 
         def create(self, validated_data):
             return Account.objects.create(**validated_data)
