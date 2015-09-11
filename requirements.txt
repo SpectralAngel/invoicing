@@ -17,3 +17,4 @@ gunicorn
 dj-static
 psycopg2
 django-bootstrap3
+django-filter

@@ -54,6 +54,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class PlaceViewSet(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
+    filter_fields = ('company',)
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:
