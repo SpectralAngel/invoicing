@@ -14,7 +14,8 @@ module.exports = {
     output: {
         path: path.resolve('./assets/bundles/'),
         filename: "[name]-[hash].js",
-        publicPath: 'http://localhost:3000/assets/bundles/' // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+        // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+        publicPath: 'http://localhost:3000/assets/bundles/'
     },
 
     plugins: [
@@ -25,8 +26,14 @@ module.exports = {
 
     module: {
         loaders: [
-            // we pass the output from babel loader to react-hot loader
-            { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loaders: [
+                    'react-hot',
+                    'babel'
+                ]
+            }
         ]
     },
 

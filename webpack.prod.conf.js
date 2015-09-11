@@ -13,12 +13,27 @@ module.exports = {
     },
 
     plugins: [
-        new BundleTracker({filename: './webpack-stats-prod.json'})
+        new BundleTracker({filename: './webpack-stats-prod.json'}),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false
+            }
+        })
     ],
 
     module: {
         loaders: [
-            { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader'} // to transform JSX into JS
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel-loader'
+            }
         ]
     },
 
