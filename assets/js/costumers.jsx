@@ -1,38 +1,13 @@
 var React = require('react');
+var Reflux = require('reflux');
 var Costumer = require('./costumer');
+var costumerActions = require('./actions/costumer');
+var costumerStore = require('./stores/costumers');
 
 var Costumers = React.createClass({
-    getInitialState : function() {
-      return { costumers: [] };
-    },
+    mixins: [Reflux.connect(costumerStore, 'costumers')],
 
-    componentDidMount: function(){
-        // When the component loads, send a jQuery AJAX request
-        var self = this;
-
-        $.getJSON(this.props.source, function(result){
-
-            if(!result || !result || !result.length){
-                return;
-            }
-
-            var costumers = result.map(function(c){
-                return {
-                    id: c.id,
-                    name: c.name,
-                    rtn: c.rtn
-                };
-            });
-
-            // Update the component's state. This will trigger a render.
-
-            self.setState({ costumers: costumers });
-
-        });
-
-    },
-
-    render : function() {
+    render() {
 
         var costumers = this.state.costumers.map(function(costumer) {
             return <Costumer key={costumer.id} name={costumer.name} rtn={costumer.rtn} />;
