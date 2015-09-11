@@ -75,6 +75,18 @@ class AccountCostumersViewSet(viewsets.ModelViewSet):
         return super(AccountCostumersViewSet, self).list(request, [], **kwargs)
 
 
+class CompanyPlacesViewSet(viewsets.ModelViewSet):
+    queryset = Place.objects.select_related('company').all()
+    serializer_class = CompanySerializer
+
+    def filter_queryset(self, queryset):
+        return self.queryset.filter(company=self.company)
+
+    def list(self, request, company=None, **kwargs):
+        self.company = Company.objects.get(pk=company)
+        return super(CompanyPlacesViewSet, self).list(request, [], **kwargs)
+
+
 class AccountCompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.select_related('account').all()
     serializer_class = CompanySerializer

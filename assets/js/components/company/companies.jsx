@@ -1,24 +1,5 @@
 var React = require('react');
-var PlaceTable = require('./place');
-
-var Company = React.createClass({
-    render: function () {
-        return <div className="panel panel-primary companies">
-            <div className="panel-heading">
-                <h3 className="panel-title">{this.props.name}</h3>
-            </div>
-            <div className="panel-body">
-                <dl>
-                    <dt>RTN</dt>
-                    <dd>{this.props.rtn}</dd>
-                    <dt>CAI</dt>
-                    <dd>{this.props.cai}</dd>
-                </dl>
-                <PlaceTable places={this.props.places} />
-            </div>
-        </div>;
-    }
-});
+var Company = require('./company');
 
 var Companies = React.createClass({
     getInitialState: function () {
@@ -55,7 +36,7 @@ var Companies = React.createClass({
     render: function () {
 
         var costumers = this.state.companies.map(function (company) {
-            return <Company key={company.id} name={company.name}
+            return <Company key={company.id} company={company} name={company.name}
                             rtn={company.rtn} cai={company.cai}
                             places={company.places}/>;
         });
@@ -68,5 +49,4 @@ var Companies = React.createClass({
     }
 });
 
-module.exports = Company;
 module.exports = Companies;
