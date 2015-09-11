@@ -2,20 +2,17 @@
 var React = require('react/addons');
 var Reflux = require('reflux');
 
+var Companies = require('./components/company/companies');
+
 var AccountStore = require('./stores/accounts');
 var AccountAcctions = require('./actions/account');
 
 var Account = React.createClass({
     mixins: [Reflux.connect(AccountStore, 'user')],
     render() {
-
-        return <div className="panel panel-primary">
-            <div className="panel-heading">
-                <h3 className="panel-title">{this.state.user.username}</h3>
-            </div>
-            <div className="panel-body">
-                <dl></dl>
-            </div>
+        return <div>
+            <h1>{this.state.user.username}</h1>
+            <Companies user={this.state.user} />
         </div>;
     }
 });
