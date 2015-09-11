@@ -18,7 +18,6 @@ var AccountStore = Reflux.createStore({
     currentUser() {
         var self = this;
         request('/auth/me/').end(function (err, res) {
-            console.log('Updating User');
             self.me = res.body;
             self.trigger(self.me);
         });
