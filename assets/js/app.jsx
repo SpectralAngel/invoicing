@@ -17,7 +17,7 @@ var App = React.createClass({
     render: function(){
         return <div>
             <div className="row">
-                <div className="col-md-6 col-xs-6">
+                <div className="col-md-12 col-xs-12">
                     <Account />
                 </div>
             </div>
