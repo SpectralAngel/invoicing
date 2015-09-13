@@ -1,5 +1,8 @@
 'use strict';
 var React = require('react');
+var Reflux = require('reflux');
+var PlaceStore = require('../../stores/places');
+var PlaceActions = require('../../actions/place');
 
 var PlaceRow = React.createClass({
     render: function () {
@@ -13,6 +16,10 @@ var PlaceRow = React.createClass({
 });
 
 var PlaceTable = React.createClass({
+    mixins: [Reflux.connect(PlaceStore, 'places')],
+    componentDidMount() {
+        PlaceActions.listCompany(this.props.company);
+    },
     render: function () {
         return <div className="places">
             <h2>Places</h2>
@@ -26,7 +33,7 @@ var PlaceTable = React.createClass({
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.places.map(function (place) {
+                {this.state.places.map(function (place) {
                     return <PlaceRow name={place.name} key={place.id}
                                      id={place.id}
                                      prefix={place.prefix}

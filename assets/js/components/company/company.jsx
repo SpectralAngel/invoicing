@@ -2,17 +2,8 @@
 var React = require('react');
 var Reflux = require('reflux');
 var PlaceTable = require('../place/placeTable');
-var PlaceStore = require('../../stores/places');
-var PlaceActions = require('../../actions/place');
 
 var Company = React.createClass({
-    mixins: [Reflux.connect(PlaceStore, 'places')],
-    componentDidMount() {
-        PlaceActions.listCompany(this.props.company);
-    },
-    componentWillReceiveProps(props) {
-        PlaceActions.listCompany(props.company);
-    },
     render: function () {
         return <div className="col-md-6 col-xs-6">
             <div className="panel panel-primary companies">
@@ -26,7 +17,7 @@ var Company = React.createClass({
                         <dt>CAI</dt>
                         <dd>{this.props.company.cai}</dd>
                     </dl>
-                    <PlaceTable places={this.state.places}/>
+                    <PlaceTable company={this.props.company} />
                 </div>
             </div>
         </div>;
