@@ -8,6 +8,7 @@ var Account = require('./account');
 var AccountStore = require('./stores/accounts');
 var AccountActions = require('./actions/account');
 
+
 var App = React.createClass({
 
     componentDidMount: function() {
@@ -19,14 +20,6 @@ var App = React.createClass({
             <div className="row">
                 <div className="col-md-12 col-xs-12">
                     <Account />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-6 col-xs-6">
-                    <Costumers />
-                </div>
-                <div className="col-md-6 col-xs-6">
-
                 </div>
             </div>
             <div className="row">
