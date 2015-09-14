@@ -1,11 +1,8 @@
 'use strict';
 var React = require('react');
 var Reflux = require('reflux');
-var Costumers = require('./costumers');
-var Costumer = require('./costumer');
 var Invoices = require('./invoices');
 var Account = require('./account');
-var AccountStore = require('./stores/accounts');
 var AccountActions = require('./actions/account');
 
 
