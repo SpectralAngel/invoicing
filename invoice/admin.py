@@ -1,16 +1,17 @@
 from django.contrib import admin
-
 # Register your models here.
 from invoice.models import Invoice, Sale
 
 
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ['costumer', 'place', 'account', 'discount', 'closed', 'created']
+    list_display = ['costumer', 'place', 'account', 'discount', 'closed',
+                    'created']
     ordering = ['discount', 'closed', 'created']
 
 
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ['invoice', 'product', 'quantity', 'price', 'tax', 'total']
+    list_display = ['invoice', 'detail', 'created', 'product', 'quantity',
+                    'price', 'tax', 'total']
     ordering = ['invoice', 'product', 'quantity', 'price', 'tax', 'total']
 
 

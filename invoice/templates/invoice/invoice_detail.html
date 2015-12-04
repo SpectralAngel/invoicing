@@ -48,6 +48,7 @@
                 <tr>
                     <th>{% trans 'Qty' %}</th>
                     <th>{% trans 'Concepto' %}</th>
+                    <th>{% trans 'Detalle' %}</th>
                     <th>{% trans 'Precio unitario' %}</th>
                     <th>{% trans 'Subtotal' %}</th>
                 </tr>
@@ -57,6 +58,7 @@
                     <tr>
                         <td>{{ sale.quantity }}</td>
                         <td>{{ sale.product }}</td>
+                        <td>{{ sale.detail }}</td>
                         <td>{{ sale.price }}</td>
                         <td>{{ sale.total }}</td>
                     </tr>
