@@ -65,6 +65,7 @@ class Sale(TimeStampedModel):
     invoice = models.ForeignKey(Invoice)
     product = models.ForeignKey(ProductTemplate)
     quantity = models.IntegerField()
+    detail = models.CharField(max_length=255, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=11, blank=True,
                                 null=True)
     tax = models.DecimalField(decimal_places=2, max_digits=11, blank=True,
