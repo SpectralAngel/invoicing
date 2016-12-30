@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from decimal import Decimal
+
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import F, Sum
 from django.db.models.functions import Coalesce
-
 from django.utils.encoding import python_2_unicode_compatible
-
+from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
 
 from authentication.models import Account
@@ -24,14 +27,9 @@ class Invoice(TimeStampedModel):
 
     def subtotal(self):
 
-        subtotal = Sale.objects.filter(invoice=self).aggregate(
-            total=Sum('total')
+        return Sale.objects.filter(invoice=self).aggregate(
+            total=Coalesce(Sum('total'), Decimal())
         )['total']
-
-        if subtotal is None:
-            subtotal = Decimal()
-
-        return subtotal
 
     def tax(self):
 
@@ -44,7 +42,7 @@ class Invoice(TimeStampedModel):
         return self.tax() + self.subtotal() - self.discount
 
     def __str__(self):
-        return u'{0} {1}'.format(self.number, self.costumer.name)
+        return _('{0} {1}').format(self.number, self.costumer.name)
 
     def save(self, *args, **kwargs):
 

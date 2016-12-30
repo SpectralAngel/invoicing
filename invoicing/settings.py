@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for invoicing project.
 
@@ -9,6 +10,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
+from __future__ import unicode_literals
 import os
 
 import environ
@@ -25,7 +27,6 @@ DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -85,11 +86,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'invoicing.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 DATABASES = {'default': env.db()}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -103,7 +102,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

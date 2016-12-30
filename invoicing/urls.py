@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """invoicing URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,6 +14,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from __future__ import unicode_literals
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -52,7 +54,7 @@ urlpatterns = [
 
     url(r'^api/v1/api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
+    # url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url('^$', IndexView.as_view(), name='index'),
 ]
